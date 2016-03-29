@@ -11,6 +11,7 @@
 @interface NSObject (KJObjectSerializer)
 
 -(NSMutableDictionary *)getDictionary;
+-(NSMutableDictionary *)getDictionaryWithNullValue:(BOOL)getNullValue;
 -(void)setDictionary:(NSDictionary*)dictionary;
 
 @end

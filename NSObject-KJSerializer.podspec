@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "NSObject-KJSerializer"
-  s.version          = "0.0.1"
+  s.version          = "0.0.2"
   s.summary          = "Easy way to automate the mapping of NSObjects to NSDictionary and back again. Great for JSON handling."
   s.homepage         = "https://github.com/kevinejohn/NSObject-KJSerializer"
   s.license          = 'MIT'

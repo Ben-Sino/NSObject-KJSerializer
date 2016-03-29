@@ -55,6 +55,36 @@ NSString* getPropertyType(objc_property_t property) {
 }
 
 
+-(NSMutableDictionary *)getDictionary
+{
+    Class klass = self.class;
+    if (klass == NULL) {
+        return nil;
+    }
+    
+    unsigned int outCount, i;
+    NSMutableDictionary * results = [[NSMutableDictionary alloc] init];
+    do {
+        objc_property_t *properties = class_copyPropertyList(klass, &outCount);
+        for (i = 0; i < outCount; i++) {
+            objc_property_t property = properties[i];
+            const char *propName = property_getName(property);
+            if(propName) {
+                NSString *propertyName = [NSString stringWithUTF8String:propName];
+                
+                NSString * value = [self valueForKey:propertyName];
+                if (value) {
+                    [results setObject:value forKey:propertyName];
+                }
+            }
+        }
+        free(properties);
+        klass = [klass superclass];
+    }while(![klass isEqual:[NSObject class]]);
+    
+    return results;
+}
+
 -(NSMutableDictionary *)getDictionaryWithNullValue:(BOOL)getNullValue
 {
     Class klass = self.class;
