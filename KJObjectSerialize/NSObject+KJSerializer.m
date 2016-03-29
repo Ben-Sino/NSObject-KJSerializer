@@ -55,7 +55,7 @@ NSString* getPropertyType(objc_property_t property) {
 }
 
 
--(NSMutableDictionary *)getDictionary
+-(NSMutableDictionary *)getDictionaryWithNullValue:(BOOL)getNullValue
 {
     Class klass = self.class;
     if (klass == NULL) {
@@ -77,7 +77,9 @@ NSString* getPropertyType(objc_property_t property) {
                     [results setObject:value forKey:propertyName];
                 }
                 else {
-                    [results setObject:[NSNull null] forKey:propertyName];
+                    if (getNullValue) {
+                        [results setObject:[NSNull null] forKey:propertyName];
+                    }
                 }
             }
         }
